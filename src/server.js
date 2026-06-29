@@ -5,7 +5,7 @@ const url = require("url");
 
 const PORT = 3000;
 const clients = new Set();
-const publicDir = path.join(__dirname, "public");
+const publicDir = path.join(__dirname, "..", "public");
 
 let nowPlaying = {
   title: "Aurelia Nights",
