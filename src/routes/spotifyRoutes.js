@@ -28,6 +28,40 @@ if (parsed.pathname === "/spotify/callback") {
 
   return true;
 }
+if (parsed.pathname === "/spotify/current") {
+  spotifyService.getCurrentlyPlaying()
+    .then((song) => {
+      res.writeHead(200, {
+        "Content-Type": "application/json"
+      });
+      res.end(JSON.stringify(song, null, 2));
+    })
+    .catch((err) => {
+      res.writeHead(500, {
+        "Content-Type": "application/json"
+      });
+      res.end(JSON.stringify({ error: err.message }));
+    });
+
+  return true;
+}
+
+if (parsed.pathname === "/spotify/sync") {
+  spotifyService.syncCurrentSong()
+    .then((song) => {
+      res.writeHead(200, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ ok: true, song }, null, 2));
+    })
+    .catch((err) => {
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ ok: false, error: err.message }, null, 2));
+    });
+
+  return true;
+}
+
+
+
 return false;
 }
 module.exports = {

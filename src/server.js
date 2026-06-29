@@ -8,6 +8,8 @@ const alertRoutes = require("./routes/alertRoutes");
 const musicRoutes = require("./routes/musicRoutes");
 const staticRoutes = require("./routes/staticRoutes");
 const spotifyRoutes = require("./routes/spotifyRoutes");
+const spotifyService = require("./services/spotifyService");
+const musicService = require("./services/musicService");
 
 
 const server = http.createServer((req, res) => {
@@ -52,3 +54,5 @@ server.listen(PORT, () => {
   console.log(`Test Music:    http://localhost:${PORT}/test/music`);
   console.log("");
 });
+
+spotifyService.startPolling();
