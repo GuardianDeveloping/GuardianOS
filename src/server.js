@@ -3,9 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const url = require("url");
 
-const PORT = 3000;
 const clients = new Set();
-const publicDir = path.join(__dirname, "..", "public");
+const { PORT, publicDir } = require("./config/appConfig");
 
 let nowPlaying = {
   title: "Aurelia Nights",
