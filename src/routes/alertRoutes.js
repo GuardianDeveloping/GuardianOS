@@ -1,5 +1,7 @@
 const alertService = require("../services/alertService");
 
+
+
 function handleAlertRoutes(req, res, parsed) {
   if (parsed.pathname === "/alert") {
     const alert = {
@@ -45,4 +47,6 @@ function handleAlertRoutes(req, res, parsed) {
 
 module.exports = {
   handleAlertRoutes
-};
+
+
+}

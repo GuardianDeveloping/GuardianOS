@@ -5,7 +5,8 @@ const url = require("url");
 
 const   alertService = require("./services/alertService");
 const { PORT, publicDir } = require("./config/appConfig");
-const { handleAlertRoutes } = require("./routes/alertRoutes");
+const alertRoutes = require("./routes/alertRoutes");
+const musicRoutes = require("./routes/musicRoutes")
 
 let nowPlaying = {
   title: "Aurelia Nights",
@@ -61,28 +62,9 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  if (handleAlertRoutes(req, res, parsed)) return;
+  if (alertRoutes.handleAlertRoutes(req, res, parsed)) return;
 
-  if (parsed.pathname === "/nowplaying") {
-    nowPlaying = {
-      title: String(parsed.query.title || nowPlaying.title),
-      artist: String(parsed.query.artist || nowPlaying.artist),
-      time: Date.now()
-    };
-
-    alertService.broadcast("alert", alert);
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, nowPlaying }));
-    return;
-  }
-
-  if (parsed.pathname === "/test/music") {
-    nowPlaying = { title: "Lofi Kingdom", artist: "CozyMage", time: Date.now() };
-    alertService.broadcast("nowplaying", nowPlaying);
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, nowPlaying }));
-    return;
-  }
+  if (musicRoutes.handleMusicRoutes(req, res, parsed)) return;
 
   const safePath = path.normalize(parsed.pathname).replace(/^([.][.][/\\])+/, "");
   const filePath = path.join(publicDir, safePath);
