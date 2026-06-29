@@ -16,10 +16,10 @@ function handleMusicRoutes(req, res, parsed) {
     }
 
     if (parsed.pathname === "/test/music") {
-        nowPlaying = musicService.updateNowPlaying(
-  parsed.query.title,
-  parsed.query.artist
-);;
+      const nowPlaying = musicService.updateNowPlaying(
+  "Lofi Kingdom",
+  "CozyMage"
+);
         alertService.broadcast("nowplaying", nowPlaying);
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ ok: true, nowPlaying }));
