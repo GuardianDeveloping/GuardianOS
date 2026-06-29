@@ -1,0 +1,191 @@
+:root {
+  --walnut-dark: rgba(29, 17, 11, 0.96);
+  --walnut-mid: rgba(67, 40, 26, 0.94);
+  --gold: #d6b36a;
+  --soft-gold: #f2c38b;
+  --cream: #f5e7d2;
+  --purple: #6c3bb8;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.guardian-alert {
+  position: absolute;
+  left: 56px;
+  top: 64px;
+  width: 710px;
+  min-height: 185px;
+  border: 2px solid var(--gold);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(108,59,184,0.28), transparent 34%),
+    linear-gradient(135deg, var(--walnut-mid), var(--walnut-dark));
+  box-shadow: 0 0 26px rgba(214,179,106,0.38), inset 0 0 26px rgba(242,195,139,0.10);
+  color: var(--cream);
+  opacity: 0;
+  transform: translateX(-800px);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.guardian-alert.play {
+  animation: slideIn 0.45s ease-out forwards, fadeOut 0.75s ease-in forwards 5.2s;
+}
+
+.alert-icon {
+  width: 84px;
+  height: 84px;
+  margin-left: 28px;
+  border: 2px solid var(--gold);
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  color: var(--soft-gold);
+  text-shadow: 0 0 14px rgba(242,195,139,0.8);
+  box-shadow: 0 0 18px rgba(108,59,184,0.35);
+}
+
+.alert-text {
+  flex: 1;
+  text-align: center;
+  padding: 26px 54px 26px 22px;
+}
+
+.alert-title {
+  font-size: 27px;
+  letter-spacing: 3px;
+  color: var(--soft-gold);
+  text-transform: uppercase;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+}
+
+.alert-name {
+  margin-top: 18px;
+  font-size: 39px;
+  color: var(--cream);
+  text-shadow: 0 0 14px rgba(214,179,106,0.34);
+}
+
+.alert-amount {
+  margin-top: 8px;
+  font-size: 20px;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+.bottom-crest {
+  position: absolute;
+  bottom: -19px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 62px;
+  height: 38px;
+  border: 2px solid var(--gold);
+  border-radius: 0 0 18px 18px;
+  background: rgba(35, 20, 12, 0.98);
+  display: grid;
+  place-items: center;
+  color: var(--soft-gold);
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 12px rgba(242,195,139,0.7);
+}
+
+.particles::before {
+  content: "";
+  position: absolute;
+  left: 44px;
+  top: 42px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--purple);
+  box-shadow:
+    0 0 12px var(--purple),
+    52px 22px 0 rgba(242,195,139,0.85),
+    128px -12px 0 rgba(108,59,184,0.75),
+    545px 100px 0 rgba(242,195,139,0.75),
+    610px 30px 0 rgba(108,59,184,0.65),
+    470px -6px 0 rgba(242,195,139,0.55);
+  opacity: 0.8;
+}
+
+.now-playing {
+  position: absolute;
+  right: 52px;
+  bottom: 54px;
+  width: 420px;
+  min-height: 112px;
+  border: 2px solid rgba(214,179,106,0.9);
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(58,36,24,0.92), rgba(22,14,10,0.92));
+  box-shadow: 0 0 22px rgba(108,59,184,0.28);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 26px;
+  color: var(--cream);
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.now-playing.show {
+  animation: npIn 0.5s ease-out forwards;
+}
+
+.music-note {
+  width: 58px;
+  height: 58px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--soft-gold);
+  font-size: 34px;
+}
+
+.np-label {
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+.np-title {
+  margin-top: 5px;
+  font-size: 25px;
+}
+
+.np-artist {
+  margin-top: 3px;
+  font-size: 18px;
+  color: rgba(245,231,210,0.78);
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-800px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(-40px); opacity: 0; }
+}
+
+@keyframes npIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}

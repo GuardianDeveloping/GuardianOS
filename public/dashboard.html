@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>GuardianOS Dashboard</title>
+  <style>
+    body {
+      background: #111;
+      color: #f5e7d2;
+      font-family: Georgia, "Times New Roman", serif;
+      padding: 40px;
+    }
+    h1 { color: #f2c38b; }
+    a {
+      display: block;
+      color: #d6b36a;
+      margin: 14px 0;
+      font-size: 20px;
+    }
+    .card {
+      border: 1px solid #d6b36a;
+      border-radius: 14px;
+      padding: 20px;
+      max-width: 720px;
+      background: rgba(58,36,24,0.6);
+    }
+  </style>
+</head>
+<body>
+  <h1>GuardianOS</h1>
+  <div class="card">
+    <p>GuardianOS is running.</p>
+    <a href="/test" target="_blank">Send Test Follow Alert</a>
+    <a href="/test/raid" target="_blank">Send Test Raid Alert</a>
+    <a href="/test/music" target="_blank">Send Test Now Playing</a>
+    <a href="/" target="_blank">Open OBS Overlay</a>
+  </div>
+</body>
+</html>
