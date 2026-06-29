@@ -6,12 +6,9 @@ const url = require("url");
 const   alertService = require("./services/alertService");
 const { PORT, publicDir } = require("./config/appConfig");
 const alertRoutes = require("./routes/alertRoutes");
-const musicRoutes = require("./routes/musicRoutes")
+const musicRoutes = require("./routes/musicRoutes");
+const staticRoutes = require("./routes/staticRoutes");
 
-let nowPlaying = {
-  title: "Aurelia Nights",
-  artist: "Guardian Radio"
-};
 
 function contentType(filePath) {
   if (filePath.endsWith(".html")) return "text/html; charset=utf-8";
@@ -40,14 +37,6 @@ function sendFile(res, filePath) {
 const server = http.createServer((req, res) => {
   const parsed = url.parse(req.url, true);
 
-  if (parsed.pathname === "/") {
-    return sendFile(res, path.join(publicDir, "overlay.html"));
-  }
-
-  if (parsed.pathname === "/dashboard") {
-    return sendFile(res, path.join(publicDir, "dashboard.html"));
-  }
-
   if (parsed.pathname === "/events") {
     res.writeHead(200, {
       "Content-Type": "text/event-stream",
@@ -66,9 +55,9 @@ const server = http.createServer((req, res) => {
 
   if (musicRoutes.handleMusicRoutes(req, res, parsed)) return;
 
-  const safePath = path.normalize(parsed.pathname).replace(/^([.][.][/\\])+/, "");
-  const filePath = path.join(publicDir, safePath);
-  if (filePath.startsWith(publicDir)) return sendFile(res, filePath);
+  if (staticRoutes.handleStaticRoutes(res, parsed, publicDir, sendFile)){ return;}
+
+  
 
   res.writeHead(404);
   res.end("Not found");
