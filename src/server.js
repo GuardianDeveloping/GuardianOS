@@ -3,8 +3,9 @@ const fs = require("fs");
 const path = require("path");
 const url = require("url");
 
-const clients = new Set();
+const   alertService = require("./services/alertService");
 const { PORT, publicDir } = require("./config/appConfig");
+const { handleAlertRoutes } = require("./routes/alertRoutes");
 
 let nowPlaying = {
   title: "Aurelia Nights",
@@ -35,13 +36,6 @@ function sendFile(res, filePath) {
   });
 }
 
-function broadcast(event, data) {
-  const payload = `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
-  for (const client of clients) {
-    client.write(payload);
-  }
-}
-
 const server = http.createServer((req, res) => {
   const parsed = url.parse(req.url, true);
 
@@ -62,24 +56,12 @@ const server = http.createServer((req, res) => {
     });
 
     res.write("\n");
-    clients.add(res);
-    req.on("close", () => clients.delete(res));
+    alertService.addClient(res);
+    req.on("close", () => alertService.removeClient(res));
     return;
   }
 
-  if (parsed.pathname === "/alert") {
-    const alert = {
-      type: String(parsed.query.type || "follow"),
-      name: String(parsed.query.name || "GuardianKnight42"),
-      amount: String(parsed.query.amount || ""),
-      time: Date.now()
-    };
-
-    broadcast("alert", alert);
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, alert }));
-    return;
-  }
+  if (handleAlertRoutes(req, res, parsed)) return;
 
   if (parsed.pathname === "/nowplaying") {
     nowPlaying = {
@@ -88,29 +70,15 @@ const server = http.createServer((req, res) => {
       time: Date.now()
     };
 
-    broadcast("nowplaying", nowPlaying);
+    alertService.broadcast("alert", alert);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ ok: true, nowPlaying }));
     return;
   }
 
-  if (parsed.pathname === "/test") {
-    broadcast("alert", { type: "follow", name: "GuardianKnight42", time: Date.now() });
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, message: "Test alert sent" }));
-    return;
-  }
-
-  if (parsed.pathname === "/test/raid") {
-    broadcast("alert", { type: "raid", name: "MysticMage", amount: "12", time: Date.now() });
-    res.writeHead(200, { "Content-Type": "application/json" });
-    res.end(JSON.stringify({ ok: true, message: "Test raid sent" }));
-    return;
-  }
-
   if (parsed.pathname === "/test/music") {
     nowPlaying = { title: "Lofi Kingdom", artist: "CozyMage", time: Date.now() };
-    broadcast("nowplaying", nowPlaying);
+    alertService.broadcast("nowplaying", nowPlaying);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ ok: true, nowPlaying }));
     return;
