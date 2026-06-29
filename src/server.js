@@ -1,11 +1,13 @@
 const http = require("http");
 const url = require("url");
+require("dotenv").config();
 const fileService = require("./services/fileService");
-const   alertService = require("./services/alertService");
+const alertService = require("./services/alertService");
 const { PORT, publicDir } = require("./config/appConfig");
 const alertRoutes = require("./routes/alertRoutes");
 const musicRoutes = require("./routes/musicRoutes");
 const staticRoutes = require("./routes/staticRoutes");
+const spotifyRoutes = require("./routes/spotifyRoutes");
 
 
 const server = http.createServer((req, res) => {
@@ -28,6 +30,8 @@ const server = http.createServer((req, res) => {
   if (alertRoutes.handleAlertRoutes(req, res, parsed)) return;
 
   if (musicRoutes.handleMusicRoutes(req, res, parsed)) return;
+
+  if (spotifyRoutes.handleSpotifyRoutes(req, res, parsed)) return;
 
   if (staticRoutes.handleStaticRoutes(res, parsed, publicDir, fileService.sendFile)){ return;}
 
