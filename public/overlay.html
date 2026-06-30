@@ -19,13 +19,31 @@
     </section>
 
     <section id="nowPlaying" class="now-playing hidden">
-      <img id="npAlbumArt" class="np-album-art" />
+          <div class="vinyl-wrap">
+      <div class="vinyl">
+        <img id="npAlbumArt" class="np-album-art" />
+      </div>
+
+      <div id="tonearm" class="tonearm">
+        <div class="tonearm-head"></div>
+      </div>
+    </div>
+      </div>
 
       <div class="np-info">
         <div class="np-label">NOW PLAYING</div>
         <div id="npTitle" class="np-title">--</div>
         <div id="npArtist" class="np-artist">--</div>
         <div id="npAlbum" class="np-album">--</div>
+
+        <div class="np-progress">
+          <div id="npProgressFill" class="np-progress-fill"></div>
+        </div>
+
+        <div class="np-time">
+          <span id="npElapsed">0:00</span>
+          <span id="npDuration">0:00</span>
+        </div>
       </div>
     </section>
 

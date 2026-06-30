@@ -193,14 +193,140 @@ body {
   align-items: center;
   gap: 16px;
 }
+.np-info {
+  flex: 1;
+  min-width: 0;
+}
+.np-info.change {
+  animation: textSwap 550ms ease;
+}
+.np-progress {
+  width: 100%;
+  height: 6px;
+  margin-top: 10px;
+  background: rgba(245, 231, 210, 0.18);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.np-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--gold);
+  border-radius: 999px;
+}
+
+.np-time {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(245, 231, 210, 0.65);
+}
+.np-album-art.change {
+  animation: albumSwap 650ms ease;
+}
+.vinyl {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  padding: 8px;
+  background: radial-gradient(circle, #1a1a1a 0 35%, #050505 36% 100%);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.vinyl.playing {
+  animation: spin 6s linear infinite;
+}
 
 .np-album-art {
-  width: 72px;
-  height: 72px;
-  border-radius: 12px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
   object-fit: cover;
-  display: none;
+  display: block;
+}
+
+.vinyl-wrap {
+  position: relative;
+  width: 98px;
+  height: 98px;
   flex-shrink: 0;
+}
+
+.vinyl {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  padding: 8px;
+  background: radial-gradient(circle, #1a1a1a 0 35%, #050505 36% 100%);
+  display: grid;
+  place-items: center;
+}
+
+.vinyl.playing {
+  animation: spin 6s linear infinite;
+}
+
+.tonearm {
+  position: absolute;
+  width: 5px;
+  height: 70px;
+  left: 76px;
+  top: -4px;
+  background: linear-gradient(#d6b36a, #6f5530);
+  border-radius: 999px;
+  transform-origin: top center;
+  transform: rotate(45deg);
+  transition: transform 0.6s ease;
+  z-index: 5;
+}
+
+.tonearm.on {
+  transform: rotate(22deg);
+}
+
+.tonearm.lift {
+  transform: rotate(45deg);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes albumSwap {
+  0% {
+    transform: scale(0.85) rotate(-8deg);
+    opacity: 0.4;
+  }
+
+  40% {
+    transform: scale(1.12) rotate(4deg);
+    opacity: 1;
+    box-shadow: 0 0 22px rgba(214, 179, 106, 0.7);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+    box-shadow: none;
+  }
+}
+
+@keyframes textSwap {
+  0% {
+    opacity: 0.2;
+    transform: translateY(6px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideIn {

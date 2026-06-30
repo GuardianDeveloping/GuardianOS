@@ -181,35 +181,43 @@ async function syncCurrentSong() {
 
 }
 
-function startPolling() {
-  setInterval(async () => {
-    try {
-      const spotifySong = await getCurrentlyPlaying();
+async function pollSpotify() {
+  try {
+    const spotifySong = await getCurrentlyPlaying();
 
-      if (!spotifySong || !spotifySong.isPlaying) return;
+    if (!spotifySong) return;
 
-      const currentSong = musicService.getCurrentSong();
+    const currentSong = musicService.getCurrentSong();
 
-      const songChanged =
-        currentSong.title !== spotifySong.title ||
-        currentSong.artist !== spotifySong.artist;
+    const songChanged =
+      currentSong.title !== spotifySong.title ||
+      currentSong.artist !== spotifySong.artist;
 
-      if (!songChanged) return;
-
-     const nowPlaying = musicService.updateNowPlaying(
+    const nowPlaying = musicService.updateNowPlaying(
   spotifySong.title,
   spotifySong.artist,
   {
     album: spotifySong.album,
-    albumArtUrl: spotifySong.albumArtUrl
+    albumArtUrl: spotifySong.albumArtUrl,
+    durationMs: spotifySong.durationMs,
+    progressMs: spotifySong.progressMs,
+    isPlaying: spotifySong.isPlaying
   }
-  
 );
+
+alertService.broadcast("nowplaying", nowPlaying);
+
+    if (songChanged) {
       alertService.broadcast("nowplaying", nowPlaying);
-    } catch (err) {
-      // Spotify may not be connected yet
     }
-  }, 5000);
+  } catch (err) {
+    // Spotify may not be connected yet
+  }
+}
+
+function startPolling() {
+  pollSpotify(); // runs immediately
+  setInterval(pollSpotify, 5000);
 }
 
 module.exports = {

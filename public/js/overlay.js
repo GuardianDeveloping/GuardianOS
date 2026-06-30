@@ -9,6 +9,13 @@ const npTitle = document.getElementById("npTitle");
 const npArtist = document.getElementById("npArtist");
 const npAlbum = document.getElementById("npAlbum");
 const npAlbumArt = document.getElementById("npAlbumArt");
+const progressFill = document.getElementById("npProgressFill");
+const elapsed = document.getElementById("npElapsed");
+const duration = document.getElementById("npDuration");
+const info = document.querySelector(".np-info");
+const vinyl = document.querySelector(".vinyl");
+const tonearm = document.getElementById("tonearm");
+let progressTimer = null;
 
 const alertTypes = {
   follow: { title: "A NEW GUARDIAN ARRIVES", icon: "🛡️" },
@@ -38,26 +45,83 @@ function showAlert(data) {
   alertBox.classList.add("play");
 }
 
+let lastSong = "";
 
 function updateNowPlaying(payload) {
-  const nowPlaying = document.getElementById("nowPlaying");
   nowPlaying.classList.add("show");
 
-  document.getElementById("npTitle").textContent = payload.title;
-  document.getElementById("npArtist").textContent = payload.artist;
-  document.getElementById("npAlbum").textContent = payload.album || "--";
+  npTitle.textContent = payload.title;
+  npArtist.textContent = payload.artist;
+  npAlbum.textContent = payload.album || "--";
 
-  const img = document.getElementById("npAlbumArt");
 
-  if (payload.albumArtUrl) {
-    img.src = payload.albumArtUrl;
-    img.style.display = "block";
-  } else {
-    img.removeAttribute("src");
-    img.style.display = "none";
-  }
+if (payload.isPlaying) {
+  vinyl.classList.add("playing");
+  tonearm.classList.add("on");
+  tonearm.classList.remove("lift");
+} else {
+  vinyl.classList.remove("playing");
+  tonearm.classList.remove("on");
+  tonearm.classList.add("lift");
 
-  console.log("NOWPLAYING PAYLOAD:", payload);
+  if (progressTimer) clearInterval(progressTimer);
+}
+
+if (progressTimer) clearInterval(progressTimer);
+
+if (
+  payload.isPlaying &&
+  payload.durationMs &&
+  payload.progressMs !== undefined
+) {
+  let progressMs = payload.progressMs;
+  const durationMs = payload.durationMs;
+
+  const percent = Math.min(100, (progressMs / durationMs) * 100);
+  progressFill.style.width = `${percent}%`;
+  elapsed.textContent = formatTime(progressMs);
+  duration.textContent = formatTime(durationMs);
+
+  progressTimer = setInterval(() => {
+    progressMs += 100;
+
+    const percent = Math.min(100, (progressMs / durationMs) * 100);
+    progressFill.style.width = `${percent}%`;
+    elapsed.textContent = formatTime(progressMs);
+
+    if (progressMs >= durationMs) clearInterval(progressTimer);
+  }, 100);
+}
+const songKey = `${payload.title}-${payload.artist}`;
+
+if (songKey !== lastSong) {
+  swapAlbumArt(payload.albumArtUrl);
+  lastSong = songKey;
+}
+}
+function formatTime(ms) {
+  const totalSeconds = Math.floor(ms / 1000);
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  return `${minutes}:${String(seconds).padStart(2, "0")}`;
+}
+
+function swapAlbumArt(url) {
+  if (!url) return;
+
+  const preloaded = new Image();
+
+  preloaded.onload = () => {
+    npAlbumArt.src = url;
+    npAlbumArt.style.display = "block";
+
+    npAlbumArt.classList.remove("change");
+    void npAlbumArt.offsetWidth;
+    npAlbumArt.classList.add("change");
+  };
+
+  preloaded.src = url;
 }
 
 
