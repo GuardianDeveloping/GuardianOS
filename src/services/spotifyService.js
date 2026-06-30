@@ -134,6 +134,18 @@ async function getCurrentlyPlaying() {
     return null;
   }
 
+  const item = data.item;
+  const spotifySong = {
+    isPlaying: data.is_playing,
+    title: item.name,
+    album: item.album.name,
+    artist: item.artists.map(a => a.name).join(", "),
+    albumArtUrl: item.album.images[0]?.url || null, 
+    durationMs: item.duration_ms,
+    progressMs: data.progress_ms
+  }
+  return spotifySong;
+
   return {
     title: data.item.name,
     artist: data.item.artists.map((artist) => artist.name).join(", "),
@@ -141,6 +153,7 @@ async function getCurrentlyPlaying() {
     isPlaying: data.is_playing,
     time: Date.now()
   };
+
 }
 
 async function syncCurrentSong() {
@@ -150,14 +163,22 @@ async function syncCurrentSong() {
     return null;
   }
 
-  const nowPlaying = musicService.updateNowPlaying(
-    spotifySong.title,
-    spotifySong.artist
-  );
+ const nowPlaying = musicService.updateNowPlaying(
+  spotifySong.title,
+  spotifySong.artist,
+  {
+    album: spotifySong.album,
+    albumArtUrl: spotifySong.albumArtUrl,
+    durationMs: spotifySong.durationMs,
+    progressMs: spotifySong.progressMs,
+    isPlaying: spotifySong.isPlaying
+  }
+);
 
   alertService.broadcast("nowplaying", nowPlaying);
 
   return nowPlaying;
+
 }
 
 function startPolling() {
@@ -175,11 +196,15 @@ function startPolling() {
 
       if (!songChanged) return;
 
-      const nowPlaying = musicService.updateNowPlaying(
-        spotifySong.title,
-        spotifySong.artist
-      );
-
+     const nowPlaying = musicService.updateNowPlaying(
+  spotifySong.title,
+  spotifySong.artist,
+  {
+    album: spotifySong.album,
+    albumArtUrl: spotifySong.albumArtUrl
+  }
+  
+);
       alertService.broadcast("nowplaying", nowPlaying);
     } catch (err) {
       // Spotify may not be connected yet

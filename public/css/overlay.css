@@ -7,7 +7,8 @@
   --purple: #6c3bb8;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   width: 100%;
   height: 100%;
@@ -25,9 +26,15 @@ html, body {
   border: 2px solid var(--gold);
   border-radius: 18px;
   background:
-    radial-gradient(circle at 12% 20%, rgba(108,59,184,0.28), transparent 34%),
+    radial-gradient(
+      circle at 12% 20%,
+      rgba(108, 59, 184, 0.28),
+      transparent 34%
+    ),
     linear-gradient(135deg, var(--walnut-mid), var(--walnut-dark));
-  box-shadow: 0 0 26px rgba(214,179,106,0.38), inset 0 0 26px rgba(242,195,139,0.10);
+  box-shadow:
+    0 0 26px rgba(214, 179, 106, 0.38),
+    inset 0 0 26px rgba(242, 195, 139, 0.1);
   color: var(--cream);
   opacity: 0;
   transform: translateX(-800px);
@@ -37,7 +44,9 @@ html, body {
 }
 
 .guardian-alert.play {
-  animation: slideIn 0.45s ease-out forwards, fadeOut 0.75s ease-in forwards 5.2s;
+  animation:
+    slideIn 0.45s ease-out forwards,
+    fadeOut 0.75s ease-in forwards 5.2s;
 }
 
 .alert-icon {
@@ -50,8 +59,8 @@ html, body {
   place-items: center;
   font-size: 38px;
   color: var(--soft-gold);
-  text-shadow: 0 0 14px rgba(242,195,139,0.8);
-  box-shadow: 0 0 18px rgba(108,59,184,0.35);
+  text-shadow: 0 0 14px rgba(242, 195, 139, 0.8);
+  box-shadow: 0 0 18px rgba(108, 59, 184, 0.35);
 }
 
 .alert-text {
@@ -65,14 +74,14 @@ html, body {
   letter-spacing: 3px;
   color: var(--soft-gold);
   text-transform: uppercase;
-  text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9);
 }
 
 .alert-name {
   margin-top: 18px;
   font-size: 39px;
   color: var(--cream);
-  text-shadow: 0 0 14px rgba(214,179,106,0.34);
+  text-shadow: 0 0 14px rgba(214, 179, 106, 0.34);
 }
 
 .alert-amount {
@@ -97,7 +106,7 @@ html, body {
   color: var(--soft-gold);
   font-size: 20px;
   font-weight: bold;
-  text-shadow: 0 0 12px rgba(242,195,139,0.7);
+  text-shadow: 0 0 12px rgba(242, 195, 139, 0.7);
 }
 
 .particles::before {
@@ -111,11 +120,11 @@ html, body {
   background: var(--purple);
   box-shadow:
     0 0 12px var(--purple),
-    52px 22px 0 rgba(242,195,139,0.85),
-    128px -12px 0 rgba(108,59,184,0.75),
-    545px 100px 0 rgba(242,195,139,0.75),
-    610px 30px 0 rgba(108,59,184,0.65),
-    470px -6px 0 rgba(242,195,139,0.55);
+    52px 22px 0 rgba(242, 195, 139, 0.85),
+    128px -12px 0 rgba(108, 59, 184, 0.75),
+    545px 100px 0 rgba(242, 195, 139, 0.75),
+    610px 30px 0 rgba(108, 59, 184, 0.65),
+    470px -6px 0 rgba(242, 195, 139, 0.55);
   opacity: 0.8;
 }
 
@@ -125,10 +134,14 @@ html, body {
   bottom: 54px;
   width: 420px;
   min-height: 112px;
-  border: 2px solid rgba(214,179,106,0.9);
+  border: 2px solid rgba(214, 179, 106, 0.9);
   border-radius: 18px;
-  background: linear-gradient(135deg, rgba(58,36,24,0.92), rgba(22,14,10,0.92));
-  box-shadow: 0 0 22px rgba(108,59,184,0.28);
+  background: linear-gradient(
+    135deg,
+    rgba(58, 36, 24, 0.92),
+    rgba(22, 14, 10, 0.92)
+  );
+  box-shadow: 0 0 22px rgba(108, 59, 184, 0.28);
   display: flex;
   align-items: center;
   gap: 18px;
@@ -168,24 +181,57 @@ html, body {
 .np-artist {
   margin-top: 3px;
   font-size: 18px;
-  color: rgba(245,231,210,0.78);
+  color: rgba(245, 231, 210, 0.78);
 }
 
 .hidden {
   display: none;
 }
 
+.now-playing {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.np-album-art {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: cover;
+  display: none;
+  flex-shrink: 0;
+}
+
 @keyframes slideIn {
-  from { transform: translateX(-800px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+  from {
+    transform: translateX(-800px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-  from { transform: translateX(0); opacity: 1; }
-  to { transform: translateX(-40px); opacity: 0; }
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
 }
 
 @keyframes npIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

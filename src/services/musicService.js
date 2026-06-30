@@ -4,11 +4,12 @@ let nowPlaying = {
   time: Date.now()
 };
 
-function updateNowPlaying(title, artist) {
+function updateNowPlaying(title, artist, extra = {}) {
   nowPlaying = {
     title: String(title || nowPlaying.title),
     artist: String(artist || nowPlaying.artist),
-    time: Date.now()
+    time: Date.now(),
+    ...extra
   };
 
   return nowPlaying;

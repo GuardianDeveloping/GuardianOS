@@ -1,32 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>GuardianOS Overlay</title>
-  <link rel="stylesheet" href="/css/overlay.css" />
-</head>
-<body>
-  <section id="alert" class="guardian-alert">
-    <div class="particles"></div>
-    <div id="alertIcon" class="alert-icon">🛡️</div>
-    <div class="alert-text">
-      <div id="alertTitle" class="alert-title">A NEW GUARDIAN ARRIVES</div>
-      <div id="alertName" class="alert-name">GuardianKnight42</div>
-      <div id="alertAmount" class="alert-amount"></div>
-    </div>
-    <div class="bottom-crest">GG</div>
-  </section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GuardianOS Overlay</title>
+    <link rel="stylesheet" href="/css/overlay.css" />
+  </head>
+  <body>
+    <section id="alert" class="guardian-alert">
+      <div class="particles"></div>
+      <div id="alertIcon" class="alert-icon">🛡️</div>
+      <div class="alert-text">
+        <div id="alertTitle" class="alert-title">A NEW GUARDIAN ARRIVES</div>
+        <div id="alertName" class="alert-name">GuardianKnight42</div>
+        <div id="alertAmount" class="alert-amount"></div>
+      </div>
+      <div class="bottom-crest">GG</div>
+    </section>
 
-  <section id="nowPlaying" class="now-playing hidden">
-    <div class="music-note">♪</div>
-    <div>
-      <div class="np-label">Now Playing</div>
-      <div id="npTitle" class="np-title">Aurelia Nights</div>
-      <div id="npArtist" class="np-artist">Guardian Radio</div>
-    </div>
-  </section>
+    <section id="nowPlaying" class="now-playing hidden">
+      <img id="npAlbumArt" class="np-album-art" />
 
-  <script src="/js/overlay.js"></script>
-</body>
+      <div class="np-info">
+        <div class="np-label">NOW PLAYING</div>
+        <div id="npTitle" class="np-title">--</div>
+        <div id="npArtist" class="np-artist">--</div>
+        <div id="npAlbum" class="np-album">--</div>
+      </div>
+    </section>
+
+    <script src="/js/overlay.js"></script>
+  </body>
 </html>
