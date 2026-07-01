@@ -2,46 +2,172 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>GuardianOS Dashboard</title>
-    <style>
-      body {
-        background: #111;
-        color: #f5e7d2;
-        font-family: Georgia, "Times New Roman", serif;
-        padding: 40px;
-      }
-      h1 {
-        color: #f2c38b;
-      }
-      a {
-        display: block;
-        color: #d6b36a;
-        margin: 14px 0;
-        font-size: 20px;
-      }
-      .card {
-        border: 1px solid #d6b36a;
-        border-radius: 14px;
-        padding: 20px;
-        max-width: 720px;
-        background: rgba(58, 36, 24, 0.6);
-      }
-    </style>
+    <title>Guardian Core</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
   </head>
+
   <body>
-    <h1>GuardianOS</h1>
-    <div class="card">
-      <p>GuardianOS is running.</p>
-      <a href="http://localhost:3000/test" target="_blank"
-        >Send Test Follow Alert</a
-      >
-      <a href="http://localhost:3000/test/raid" target="_blank"
-        >Send Test Raid Alert</a
-      >
-      <a href="http://localhost:3000/test/music" target="_blank"
-        >Send Test Now Playing</a
-      >
-      <a href="http://localhost:3000" target="_blank">Open OBS Overlay</a>
-    </div>
+    <main class="core-shell">
+      <aside class="core-sidebar">
+        <h2>GuardianOS</h2>
+
+        <div class="guardian-profile">
+          <div class="guardian-emblem">🛡️</div>
+          <div>
+            <strong>Guardian Gavin</strong>
+            <span>Level 27 Guardian</span>
+          </div>
+        </div>
+
+        <div class="sidebar-status">
+          <div><span class="dot"></span> Spotify Connected</div>
+          <div><span class="dot"></span> Overlay Online</div>
+          <div><span class="dot"></span> Alert Engine</div>
+          <div><span class="dot"></span> Music Engine</div>
+        </div>
+
+        <nav>
+          <button onclick="showPanel('core')">🏠 Core</button>
+          <button onclick="showPanel('spotify')">🎵 Spotify</button>
+          <button onclick="showPanel('alerts')">🔔 Alerts</button>
+          <button onclick="showPanel('widgets')">🧩 Widgets</button>
+          <button onclick="showPanel('themes')">🎨 Themes</button>
+          <button onclick="showPanel('settings')">⚙ Settings</button>
+        </nav>
+      </aside>
+
+      <section class="core-main">
+        <section id="panel-core" class="panel active">
+          <header class="core-header">
+            <div>
+              <h1>Guardian Core</h1>
+              <p>GuardianOS Command Center</p>
+            </div>
+            <div class="core-badge">ONLINE</div>
+          </header>
+
+          <section class="status-grid">
+            <div class="status-card">
+              <span>Spotify</span><strong>Connected</strong>
+            </div>
+            <div class="status-card">
+              <span>Music Engine</span><strong>Running</strong>
+            </div>
+            <div class="status-card">
+              <span>Alert Engine</span><strong>Running</strong>
+            </div>
+            <div class="status-card">
+              <span>Overlay</span><strong>Online</strong>
+            </div>
+          </section>
+
+          <section class="control-panel">
+            <button onclick="location.href = '/test'">Test Alert</button>
+            <button onclick="location.href = '/test/raid'">Test Raid</button>
+            <button onclick="location.href = '/spotify/sync'">
+              Sync Spotify
+            </button>
+            <button onclick="location.href = '/'">Open Overlay</button>
+            <section class="control-panel scene-controls">
+              <button onclick="fetch('/starting-soon/start?minutes=5')">
+                Start 5 Min
+              </button>
+              <button onclick="fetch('/starting-soon/start?minutes=10')">
+                Start 10 Min
+              </button>
+              <button onclick="fetch('/starting-soon/hide')">
+                Hide Starting Soon
+              </button>
+            </section>
+          </section>
+        </section>
+
+        <section id="panel-spotify" class="panel">
+          <h1>Spotify Engine</h1>
+          <p>Manage Spotify connection and Now Playing widget.</p>
+        </section>
+
+        <section id="panel-alerts" class="panel">
+          <header class="core-header">
+            <div>
+              <h1>Alert Engine</h1>
+              <p>Monitor and test GuardianOS stream alerts.</p>
+            </div>
+
+            <div id="alertStatusBadge" class="core-badge">CHECKING</div>
+          </header>
+
+          <section class="status-grid">
+            <div class="status-card">
+              <span>Engine</span>
+              <strong id="alertProcessing">Checking...</strong>
+            </div>
+
+            <div class="status-card">
+              <span>Queue</span>
+              <strong id="alertQueueLength">0</strong>
+            </div>
+
+            <div class="status-card">
+              <span>Mode</span>
+              <strong>Stream Ready</strong>
+            </div>
+          </section>
+
+          <section class="control-panel">
+            <button onclick="location.href = '/test'">Test Follow</button>
+            <button onclick="location.href = '/test/sub'">Test Sub</button>
+            <button onclick="location.href = '/test/raid'">Test Raid</button>
+            <button onclick="location.href = '/test/cheer'">Test Cheer</button>
+            <button onclick="location.href = '/test/donation'">
+              Test Donation
+            </button>
+          </section>
+        </section>
+
+        <section id="panel-widgets" class="panel">
+          <h1>Widget Engine</h1>
+          <p>Enable, disable, and manage GuardianOS widgets.</p>
+        </section>
+
+        <section id="panel-themes" class="panel">
+          <h1>Theme Engine</h1>
+          <p>Customize GuardianOS visual styles.</p>
+        </section>
+
+        <section id="panel-settings" class="panel">
+          <h1>Settings</h1>
+          <p>System configuration and preferences.</p>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      function showPanel(name) {
+        document.querySelectorAll(".panel").forEach((panel) => {
+          panel.classList.remove("active");
+        });
+
+        document.getElementById(`panel-${name}`).classList.add("active");
+        if (name === "alerts") {
+          updateAlertPanel();
+        }
+      }
+
+      async function updateAlertPanel() {
+        const res = await fetch("/alerts/status");
+        const status = await res.json();
+
+        document.getElementById("alertProcessing").textContent =
+          status.processing ? "Playing" : "Idle";
+
+        document.getElementById("alertQueueLength").textContent =
+          status.queueLength;
+
+        document.getElementById("alertStatusBadge").textContent = "RUNNING";
+      }
+
+      setInterval(updateAlertPanel, 3000);
+    </script>
   </body>
 </html>

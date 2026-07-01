@@ -10,6 +10,7 @@ const staticRoutes = require("./routes/staticRoutes");
 const spotifyRoutes = require("./routes/spotifyRoutes");
 const spotifyService = require("./services/spotifyService");
 const musicService = require("./services/musicService");
+const startingSoonRoutes = require("./routes/startingSoonRoutes");
 
 
 const server = http.createServer((req, res) => {
@@ -34,6 +35,8 @@ const server = http.createServer((req, res) => {
   if (musicRoutes.handleMusicRoutes(req, res, parsed)) return;
 
   if (spotifyRoutes.handleSpotifyRoutes(req, res, parsed)) return;
+  
+  if (startingSoonRoutes.handleStartingSoonRoutes(req, res, parsed)) return;
 
   if (staticRoutes.handleStaticRoutes(res, parsed, publicDir, fileService.sendFile)){ return;}
 

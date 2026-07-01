@@ -291,6 +291,272 @@ body {
 .tonearm.lift {
   transform: rotate(45deg);
 }
+.guardian-alert.follow {
+  border-color: #d6b36a;
+  box-shadow: 0 0 25px rgba(214, 179, 106, 0.45);
+}
+
+.guardian-alert.sub {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 25px rgba(139, 92, 246, 0.55);
+}
+
+.guardian-alert.raid {
+  border-color: #dc2626;
+  box-shadow: 0 0 30px rgba(220, 38, 38, 0.65);
+}
+
+.guardian-alert.cheer {
+  border-color: #2563eb;
+  box-shadow: 0 0 30px rgba(37, 99, 235, 0.65);
+}
+
+.guardian-alert.donation {
+  border-color: #10b981;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.65);
+}
+
+.alert-icon {
+  transition: 0.35s;
+}
+
+.alert-box.follow .alert-icon {
+  color: #d6b36a;
+}
+
+.alert-box.sub .alert-icon {
+  color: #8b5cf6;
+}
+
+.alert-box.raid .alert-icon {
+  color: #ef4444;
+}
+
+.alert-box.cheer .alert-icon {
+  color: #60a5fa;
+}
+
+.alert-box.donation .alert-icon {
+  color: #34d399;
+}
+.guardian-alert {
+  border: 2px solid #d6b36a;
+}
+
+.starting-soon {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at top, rgba(214, 179, 106, 0.18), transparent 35%),
+    linear-gradient(135deg, rgba(24, 17, 13, 0.96), rgba(8, 6, 5, 0.98));
+  color: var(--cream);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.6s ease;
+}
+
+.starting-soon.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.ss-card {
+  text-align: center;
+  padding: 48px 70px;
+  border: 2px solid rgba(214, 179, 106, 0.65);
+  border-radius: 28px;
+  background: rgba(45, 33, 25, 0.72);
+  box-shadow: 0 0 60px rgba(214, 179, 106, 0.25);
+  animation: ssFloat 4s ease-in-out infinite;
+}
+
+.ss-kicker {
+  color: var(--gold);
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.ss-card h1 {
+  font-size: 72px;
+  color: var(--gold);
+}
+
+.ss-timer {
+  font-size: 86px;
+  margin: 20px 0;
+  font-weight: bold;
+}
+
+.ss-card p {
+  color: rgba(245, 231, 210, 0.75);
+  font-size: 22px;
+}
+
+@keyframes ssFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.boot-screen {
+  position: fixed;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  background: #090705;
+
+  z-index: 5000;
+
+  opacity: 1;
+
+  transition: opacity 2s ease;
+}
+
+.boot-logo {
+  width: 170px;
+  opacity: 0;
+  transform: scale(0.85);
+  animation:
+    bootLogo 0.8s forwards,
+    breathe 4s ease-in-out infinite 1s;
+}
+
+.boot-title {
+  margin-top: 25px;
+
+  font-size: 54px;
+
+  color: var(--gold);
+
+  opacity: 0;
+
+  animation: fadeUp 0.7s 0.7s forwards;
+}
+
+.boot-status {
+  margin-top: 10px;
+
+  opacity: 0.7;
+
+  animation: fadeUp 0.7s 1.2s forwards;
+
+  color: rgba(245, 231, 210, 0.75);
+}
+
+.boot-checks {
+  margin-top: 35px;
+
+  display: grid;
+
+  gap: 10px;
+  color: rgba(245, 231, 210, 0.75);
+}
+
+.boot-item {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease;
+}
+
+.boot-item.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.boot-item.system-ready {
+  color: var(--gold);
+  font-weight: bold;
+  text-shadow: 0 0 14px rgba(214, 179, 106, 0.75);
+}
+
+.boot-screen.ready .boot-logo {
+  animation: crestPulse 1.2s ease;
+}
+.overlay-shake {
+  animation: screenShake 0.55s ease;
+}
+
+@keyframes screenShake {
+  0% {
+    transform: translate(0, 0);
+  }
+  15% {
+    transform: translate(-8px, 5px);
+  }
+  30% {
+    transform: translate(7px, -4px);
+  }
+  45% {
+    transform: translate(-6px, 3px);
+  }
+  60% {
+    transform: translate(5px, -2px);
+  }
+  75% {
+    transform: translate(-3px, 2px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+@keyframes crestPulse {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(214, 179, 106, 0));
+  }
+  50% {
+    transform: scale(1.07);
+    filter: drop-shadow(0 0 22px rgba(214, 179, 106, 0.8));
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 0 rgba(214, 179, 106, 0));
+  }
+}
+
+@keyframes bootLogo {
+  to {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 @keyframes spin {
   to {
