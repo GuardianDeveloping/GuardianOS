@@ -223,7 +223,7 @@ const bootItems = document.querySelectorAll(".boot-item");
 async function playBoot(){
 
 for (const item of bootItems) {
-  await new Promise(r => setTimeout(r, 1200));
+  await new Promise(r => setTimeout(r, 900));
 
   item.classList.add("show");
   item.innerHTML = "✓ " + item.textContent;

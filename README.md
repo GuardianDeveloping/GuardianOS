@@ -1,62 +1,102 @@
 # 🛡️ GuardianOS
 
-![Status](https://img.shields.io/badge/status-alpha-blue)
-![Node.js](https://img.shields.io/badge/Node.js-22-green)
-![License](https://img.shields.io/badge/license-MIT-yellow)
+> A fantasy-inspired streaming operating system built from scratch to power immersive livestreams through real-time overlays, automation, and interactive experiences.
 
-> A modular streaming operating system designed to power immersive fantasy livestreams through real-time alerts, overlays, automation, and interactive experiences.
-
-GuardianOS is an open-source project that I created to power my livestream with custom OBS overlays, real-time alerts, Streamer.bot integration, and interactive fantasy-themed experiences.
-
-The goal of GuardianOS is to provide a single application that manages alerts, music, overlays, and future stream automation while also serving as my primary backend/full-stack portfolio project.
+![Status](https://img.shields.io/badge/status-Alpha-gold)
+![Node.js](https://img.shields.io/badge/Node.js-20+-green)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 ---
 
-## ✨ Features
+## ✨ Overview
 
-- 🛡️ Real-time alert engine
-- 🎥 OBS Browser Source integration
-- 🤖 Streamer.bot integration
-- 🧙 Fantasy-themed alert UI
-- 🧪 Local dashboard for testing alerts
-- 🎵 Foundation for a custom Now Playing widget
+GuardianOS is an open-source streaming platform that I built to completely power my livestream.
+
+Rather than relying on multiple third-party services, GuardianOS brings everything together into one modular application—from alerts and Spotify integration to scene management and stream automation.
+
+Beyond streaming, GuardianOS is my primary full-stack portfolio project and a place where I continue learning software architecture, backend development, and real-time web technologies.
 
 ---
 
-## 🚀 Tech Stack
+# ⚔️ Current Features
+
+### 🛡️ Guardian Core
+
+- Modern control dashboard
+- Live service monitoring
+- Scene controls
+- Alert testing tools
+
+### 🚨 Alert Engine
+
+- Follow alerts
+- Subscription alerts
+- Raid alerts
+- Cheer alerts
+- Donation alerts
+- Alert queue system
+- Guardian-themed animations
+- Raid screen shake effects
+
+### 🎵 Spotify Engine
+
+- Spotify OAuth authentication
+- Automatic token refresh
+- Live Now Playing
+- Animated vinyl record
+- Tonearm animation
+- Progress bar
+- Pause detection
+
+### 🎬 Scene Engine
+
+- GuardianOS boot sequence
+- Starting Soon scene
+- Live countdown timer
+- Smooth scene transitions
+
+### 🤖 Streamer.bot
+
+- Twitch event integration
+- Automated alert triggering
+- Local testing endpoints
+
+---
+
+# 🚀 Tech Stack
 
 - Node.js
-- JavaScript
+- JavaScript (ES2023)
 - HTML5
 - CSS3
-- Express _(coming soon)_
 - Server-Sent Events (SSE)
+- Spotify Web API
 - OBS Studio
 - Streamer.bot
 
 ---
 
-## 📦 Installation
+# 📦 Installation
 
-Clone the repository:
+Clone the repository
 
 ```bash
 git clone https://github.com/GuardianDeveloping/GuardianOS.git
 ```
 
-Install dependencies:
+Install dependencies
 
 ```bash
 npm install
 ```
 
-Start GuardianOS:
+Start GuardianOS
 
 ```bash
 npm start
 ```
 
-GuardianOS runs on:
+Open
 
 ```
 http://localhost:3000
@@ -64,41 +104,69 @@ http://localhost:3000
 
 ---
 
-## 🗺️ Roadmap
+# 🗺️ Roadmap
 
-### Alpha
+## ✅ Alpha (Current)
 
-- ✅ Alert Engine
-- ✅ OBS Integration
-- ✅ Streamer.bot Integration
-- ✅ Testing Dashboard
-
-### Beta
-
-- ⬜ Channel Point Alerts
-- ⬜ Sound Alerts
-- ⬜ Music Engine
-- ⬜ Modular Backend Refactor
-
-### Version 1.0
-
-- ⬜ Apartment Engine
-- ⬜ OBS Scene Automation
-- ⬜ Jeebz Integration
-- ⬜ Valoryn Integration
+- Guardian Core Dashboard
+- Spotify Engine
+- Alert Engine
+- Scene Engine
+- Starting Soon
+- GuardianOS Boot Sequence
+- Streamer.bot Integration
+- OBS Browser Source Support
 
 ---
 
-## 📚 Why I Built GuardianOS
+## 🚧 Beta
 
-I started GuardianOS because I wanted complete creative control over my livestream.
-
-Instead of relying on multiple third-party services, I wanted to build my own platform for alerts, overlays, music, and stream automation while improving my backend and full-stack development skills.
-
-GuardianOS is both the software that powers my stream and the project I use to learn professional software engineering practices.
+- BRB Scene
+- Stream Ending Scene
+- OBS Scene Automation
+- Effects Engine
+- Twitch Dashboard
+- Chat Integration
+- Sound Engine
+- Theme Manager
 
 ---
 
-## 📄 License
+## 🌍 Version 1.0
 
-MIT License
+- Valoryn Engine
+- Jeebz Integration
+- Interactive RPG World
+- Community Events
+- Quest System
+- Achievement Engine
+- Plugin System
+- Public API
+
+---
+
+# 📚 Why I Built GuardianOS
+
+GuardianOS started as a simple custom Spotify overlay.
+
+As I continued learning JavaScript and backend development, the project grew into a complete streaming platform with its own dashboard, alert system, scene engine, branding, and automation.
+
+The goal of GuardianOS is to give me complete creative control over my livestream while serving as a long-term project where I can practice software engineering, UI/UX design, real-time communication, and application architecture.
+
+Every feature is designed and built from scratch as I continue learning and improving.
+
+---
+
+## 🛡️ Current Status
+
+**GuardianOS Alpha is stream-ready.**
+
+The platform currently powers:
+
+- 🎵 Spotify
+- 🚨 Stream Alerts
+- 🎬 Starting Soon
+- 🖥️ Guardian Core Dashboard
+- 🤖 Streamer.bot Automation
+
+GuardianOS continues to evolve with every stream.
